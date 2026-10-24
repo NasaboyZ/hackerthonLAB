@@ -1,0 +1,56 @@
+{
+  "Navigation": {
+    "title": "Navigation",
+    "primary": "Expedition",
+    "secondary": "Weitere Bereiche",
+    "openMenu": "Navigation öffnen",
+    "closeMenu": "Navigation schließen",
+    "map": { "label": "Karte entdecken", "description": "Gewässer und Suchgebiete" },
+    "places": { "label": "Meine Orte", "description": "Gespeicherte Spots und Suchflächen" },
+    "logbook": { "label": "Sammelbuch", "description": "Meine Funde und Fundfotos" },
+    "expeditions": { "label": "Expeditionen", "description": "GPS-Routen und Suchsessions" },
+    "profile": { "label": "Mein Profil", "description": "Benutzername, Level und Fortschritt" },
+    "settings": { "label": "Einstellungen" },
+    "help": { "label": "Hilfe & Sicherheit" }, "level": "Level {level}", "login": "Anmelden", "register": "Registrieren"
+  },
+  "Map": {
+    "baseMap": "Basiskarte",
+    "waterBodies": "Gewässer",
+    "verifiedProhibitions": "Verifizierte Verbote",
+    "restrictions": "Einschränkungen",
+    "environmentalInformation": "Umweltinformationen",
+    "unknownStatus": "Nicht geprüft",
+    "userLocation": "Mein Standort",
+    "legend": "Kartenlegende",
+    "restriction": "Regelhinweis",
+    "notChecked": "Nicht geprüft",
+    "loading": "Regelinformationen werden geladen",
+    "error": "Regelinformationen konnten nicht geladen werden.",
+    "ready": "{count, plural, =0 {Keine geprüften Geometrien im Ausschnitt} other {# geprüfte Geometrien im Ausschnitt}}",
+    "zoomIn": "Vergrössern",
+    "zoomOut": "Verkleinern",
+    "myLocation": "Meinen Standort anzeigen",
+    "layers": "Kartenebenen",
+    "close": "Schliessen",
+    "geolocation-denied": "Standortzugriff wurde nicht erteilt.",
+    "geolocation-unavailable": "Standort ist auf diesem Gerät nicht verfügbar."
+  },
+  "Regulations": {
+    "coverage": "Offizielle Hinweise",
+    "coverageDescription": "Diese Hinweise sind verifiziert, aber noch nicht als flächige Geometrien veröffentlicht.",
+    "source": "Quelle",
+    "notChecked": "Nicht geprüft",
+    "details": "Regeldetails",
+    "verifiedGeometry": "Diese Fläche basiert auf einer verifizierten Geometrie.",
+    "authority": "Behörde",
+    "jurisdiction": "Gebiet",
+    "officialSource": "Offizielle Quelle öffnen",
+    "close": "Schliessen",
+    "classification": { "PROHIBITED": "Verboten", "RESTRICTED": "Eingeschränkt", "UNKNOWN": "Nicht geprüft", "INFORMATION_ONLY": "Information" }
+  },
+  "Places": {
+    "title": "Meine Orte", "description": "Speichere Spots und Suchflächen für deine nächste Expedition.", "yourPlaces": "Gespeicherte Orte", "empty": "Noch keine Orte gespeichert.", "addSpot": "Spot auf der Karte speichern", "addArea": "Suchfläche zeichnen", "selectSpot": "Klicke auf die Karte, um deinen Spot zu setzen.", "drawArea": "Klicke mindestens drei Punkte auf der Karte an.", "locationSelected": "Geometrie ausgewählt. Vergib jetzt einen Namen.", "name": "Name", "spotNamePlaceholder": "z. B. Alte Brücke", "areaNamePlaceholder": "z. B. Suchgebiet Rhein", "spot": "Spot", "area": "Suchfläche", "private": "Privat", "public": "Öffentlich", "save": "Speichern", "saving": "Wird gespeichert …", "cancel": "Abbrechen", "delete": "Löschen", "loadError": "Orte konnten nicht geladen werden.", "saveError": "Ort konnte nicht gespeichert werden.", "deleteError": "Ort konnte nicht gelöscht werden."
+  },
+  "Auth": { "login": "Anmelden", "register": "Konto erstellen", "logout": "Abmelden", "email": "E-Mail", "username": "Benutzername", "password": "Passwort", "confirmPassword": "Passwort bestätigen", "loading": "Wird verarbeitet …", "invalidForm": "Bitte prüfe deine Eingaben.", "invalidCredentials": "E-Mail oder Passwort ist ungültig.", "registrationError": "Konto konnte nicht erstellt werden.", "noAccount": "Noch kein Konto?", "hasAccount": "Bereits registriert?", "showPassword": "Passwort anzeigen", "hidePassword": "Passwort verbergen", "welcomeBack": "Willkommen zurück", "loginSubtitle": "Melde dich an, um deine Expedition fortzusetzen.", "joinExpedition": "Werde Teil der Expedition", "registerSubtitle": "Erstelle dein Magnetrail-Profil." },
+  "Profile": { "title": "Mein Profil", "username": "Benutzername", "email": "E-Mail", "level": "Level", "save": "Speichern", "saving": "Wird gespeichert …", "loading": "Profil wird geladen …", "updated": "Profil aktualisiert.", "loadError": "Profil konnte nicht geladen werden.", "updateError": "Profil konnte nicht aktualisiert werden." }
+}

@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+bin/
+obj/
+.vs/
+.idea/
+TestResults/
+docker-data/
+

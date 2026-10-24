@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="../Magnetrail.BuildingBlocks/Magnetrail.BuildingBlocks.csproj" />
+    <ProjectReference Include="../Modules/Magnetrail.Modules.Identity/Magnetrail.Modules.Identity.csproj" />
+    <ProjectReference Include="../Modules/Magnetrail.Modules.Players/Magnetrail.Modules.Players.csproj" />
+    <ProjectReference Include="../Modules/Magnetrail.Modules.Findings/Magnetrail.Modules.Findings.csproj" />
+    <ProjectReference Include="../Modules/Magnetrail.Modules.Exploration/Magnetrail.Modules.Exploration.csproj" />
+    <ProjectReference Include="../Modules/Magnetrail.Modules.GeoCatalog/Magnetrail.Modules.GeoCatalog.csproj" />
+    <ProjectReference Include="../Modules/Magnetrail.Modules.Regulations/Magnetrail.Modules.Regulations.csproj" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+</Project>
+

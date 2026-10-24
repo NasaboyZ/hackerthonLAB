@@ -1,0 +1,54 @@
+{
+  "version": "0.9.0",
+  "scope": "project",
+  "files": [
+    {
+      "path": "gaffa-authoring/references/actions.md",
+      "sha256": "dace3d8a83b1b5ec3452e13e7b6dc476e15a4964c17f58afb93cc2420eac1acd"
+    },
+    {
+      "path": "gaffa-authoring/SKILL.md",
+      "sha256": "b2425bf3d9216d1fb9008715e47d666a460dd7627fc4f723c028c25cdda3cb74"
+    },
+    {
+      "path": "gaffa-authoring/templates/async-poll.md",
+      "sha256": "babadbd768df7fb9b6bf40a898b4dca652ab3b526c568d577d519e2f548898ac"
+    },
+    {
+      "path": "gaffa-authoring/templates/schema-extraction.md",
+      "sha256": "5bb4e6963cffc6e12fcd92ccc7c52e737024f90c0ad13840774f3cc17f48928e"
+    },
+    {
+      "path": "gaffa-authoring/templates/sync.md",
+      "sha256": "161d6e0e5bc08f79e0c186d9d7b7671741821f11da5406abad1dc605ec767a56"
+    },
+    {
+      "path": "gaffa-debug/references/failure-classification.md",
+      "sha256": "ec5e38199951d3cfa067cc09bb46651abfea35aa0b9f12c5299f0cd41ae84a49"
+    },
+    {
+      "path": "gaffa-debug/SKILL.md",
+      "sha256": "359c45aba906fbf526801e29f3efd5a115153d6140aabd9fd60836ac64955d3d"
+    },
+    {
+      "path": "gaffa-debug/templates/rerun-with-capture.md",
+      "sha256": "e9853de5e9f23d7192c23a3110ef2993311607fec2d55ec959fb64e4ea6ae8ec"
+    },
+    {
+      "path": "gaffa-find/SKILL.md",
+      "sha256": "4d57747d2e15960beeb1d617ee4373852d08e7a9a6dc17d8b385087cb9143acb"
+    },
+    {
+      "path": "gaffa-find/templates/loop.md",
+      "sha256": "bb3acd789260de47415aa172eaa3d14f95a754431b8510ef9030633bc04f6e22"
+    },
+    {
+      "path": "gaffa-support/agents/openai.yaml",
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "path": "gaffa-support/SKILL.md",
+      "sha256": "c0ec0878efc3f1e27e702cdf3f645c290d724c1ee804f15c01a5e592386277b9"
+    }
+  ]
+}

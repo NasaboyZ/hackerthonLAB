@@ -1,0 +1,14 @@
+<Solution>
+  <Project Path="src/Magnetrail.Api/Magnetrail.Api.csproj" />
+  <Project Path="src/Magnetrail.BuildingBlocks/Magnetrail.BuildingBlocks.csproj" />
+  <Project Path="src/Modules/Magnetrail.Modules.Identity/Magnetrail.Modules.Identity.csproj" />
+  <Project Path="src/Modules/Magnetrail.Modules.Players/Magnetrail.Modules.Players.csproj" />
+  <Project Path="src/Modules/Magnetrail.Modules.Findings/Magnetrail.Modules.Findings.csproj" />
+  <Project Path="src/Modules/Magnetrail.Modules.Exploration/Magnetrail.Modules.Exploration.csproj" />
+  <Project Path="src/Modules/Magnetrail.Modules.GeoCatalog/Magnetrail.Modules.GeoCatalog.csproj" />
+  <Project Path="src/Modules/Magnetrail.Modules.Regulations/Magnetrail.Modules.Regulations.csproj" />
+  <Project Path="tests/Magnetrail.ArchitectureTests/Magnetrail.ArchitectureTests.csproj" />
+  <Project Path="tests/Magnetrail.Api.Tests/Magnetrail.Api.Tests.csproj" />
+  <Project Path="tests/Magnetrail.IntegrationTests/Magnetrail.IntegrationTests.csproj" />
+</Solution>
+

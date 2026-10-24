@@ -1,0 +1,32 @@
+{
+  "Navigation": {
+    "title": "Navigazione",
+    "primary": "Spedizione",
+    "secondary": "Altre sezioni",
+    "openMenu": "Apri navigazione",
+    "closeMenu": "Chiudi navigazione",
+    "map": { "label": "Esplora la mappa", "description": "Corsi d’acqua e aree di ricerca" },
+    "places": { "label": "I miei luoghi", "description": "Spot e aree di ricerca salvati" },
+    "logbook": { "label": "Diario dei ritrovamenti", "description": "I miei ritrovamenti e le loro foto" },
+    "expeditions": { "label": "Spedizioni", "description": "Percorsi GPS e sessioni di ricerca" },
+    "profile": { "label": "Il mio profilo", "description": "Nome utente, livello e progressi" },
+    "settings": { "label": "Impostazioni" },
+    "help": { "label": "Aiuto e sicurezza" }, "level": "Livello {level}", "login": "Accedi", "register": "Registrati"
+  },
+  "Map": {
+    "baseMap": "Mappa di base", "waterBodies": "Corsi d’acqua", "verifiedProhibitions": "Divieti verificati", "restrictions": "Restrizioni", "environmentalInformation": "Informazioni ambientali", "unknownStatus": "Non verificato", "userLocation": "La mia posizione", "legend": "Legenda", "restriction": "Indicazione normativa", "notChecked": "Non verificato", "loading": "Caricamento delle informazioni normative", "error": "Impossibile caricare le informazioni normative.", "ready": "{count, plural, =0 {Nessuna geometria verificata nella vista} other {# geometrie verificate nella vista}}", "zoomIn": "Aumenta zoom", "zoomOut": "Riduci zoom", "myLocation": "Mostra la mia posizione", "layers": "Livelli della mappa", "close": "Chiudi", "geolocation-denied": "L’accesso alla posizione non è stato concesso.", "geolocation-unavailable": "La posizione non è disponibile su questo dispositivo."
+  },
+  "Regulations": {
+    "coverage": "Indicazioni ufficiali",
+    "coverageDescription": "Queste fonti sono verificate ma non sono ancora pubblicate come geometrie spaziali.",
+    "source": "Fonte",
+    "notChecked": "Non verificato",
+    "details": "Dettagli della regola", "verifiedGeometry": "Questa area si basa su una geometria verificata.", "authority": "Autorità", "jurisdiction": "Area", "officialSource": "Apri la fonte ufficiale", "close": "Chiudi", "classification": { "PROHIBITED": "Vietato", "RESTRICTED": "Limitato", "UNKNOWN": "Non verificato", "INFORMATION_ONLY": "Informazione" }
+  },
+  "Places": {
+    "title": "I miei luoghi", "description": "Salva spot e aree di ricerca per la prossima spedizione.", "yourPlaces": "Luoghi salvati", "empty": "Nessun luogo salvato.", "addSpot": "Salva uno spot sulla mappa", "addArea": "Disegna un’area di ricerca", "selectSpot": "Clicca sulla mappa per posizionare lo spot.", "drawArea": "Clicca almeno tre punti sulla mappa.", "locationSelected": "Geometria selezionata. Assegna un nome.", "name": "Nome", "spotNamePlaceholder": "es. Vecchio ponte", "areaNamePlaceholder": "es. Area del Reno", "spot": "Spot", "area": "Area di ricerca", "private": "Privato", "public": "Pubblico", "save": "Salva", "saving": "Salvataggio…", "cancel": "Annulla", "delete": "Elimina", "loadError": "Impossibile caricare i luoghi.", "saveError": "Impossibile salvare il luogo.", "deleteError": "Impossibile eliminare il luogo."
+  },
+  "Auth": { "login": "Accedi", "register": "Crea account", "logout": "Esci", "email": "E-mail", "username": "Nome utente", "password": "Password", "confirmPassword": "Conferma password", "loading": "Elaborazione…", "invalidForm": "Controlla i dati inseriti.", "invalidCredentials": "E-mail o password non validi.", "registrationError": "Impossibile creare l’account.", "noAccount": "Non hai ancora un account?", "hasAccount": "Hai già un account?", "showPassword": "Mostra password", "hidePassword": "Nascondi password", "welcomeBack": "Bentornato", "loginSubtitle": "Accedi per continuare la tua spedizione.", "joinExpedition": "Unisciti alla spedizione", "registerSubtitle": "Crea il tuo profilo Magnetrail." },
+  "Profile": { "title": "Il mio profilo", "username": "Nome utente", "email": "E-mail", "level": "Livello", "save": "Salva", "saving": "Salvataggio…", "loading": "Caricamento profilo…", "updated": "Profilo aggiornato.", "loadError": "Impossibile caricare il profilo.", "updateError": "Impossibile aggiornare il profilo." }
+}
+
