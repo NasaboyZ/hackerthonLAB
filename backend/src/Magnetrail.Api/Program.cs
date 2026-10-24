@@ -22,6 +22,12 @@ builder.Services.AddGeoCatalogModule(builder.Configuration);
 builder.Services.AddRegulationsModule(builder.Configuration);
 
 var app = builder.Build();
+
+if (builder.Configuration.GetValue("DATABASE_INITIALIZE_SCHEMA", builder.Environment.IsProduction()))
+{
+    await DatabaseSchemaInitializer.InitializeAsync(app.Services, builder.Environment.ContentRootPath);
+}
+
 app.UseExceptionHandler();
 app.UseCors("web");
 app.UseAuthentication();

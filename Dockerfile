@@ -10,5 +10,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT=Production
 COPY --from=build /app/publish .
+COPY infra/docker/001_initial_schema.sql /app/schema/001_initial_schema.sql
 
 ENTRYPOINT ["sh", "-c", "exec dotnet Magnetrail.Api.dll --urls http://0.0.0.0:${PORT:-8080}"]
