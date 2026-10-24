@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Magnetrail.BuildingBlocks;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -85,14 +86,19 @@ public static class IdentityModule
             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             options.Lockout.AllowedForNewUsers = true;
         }).AddRoles<IdentityRole<Guid>>().AddEntityFrameworkStores<MagnetrailIdentityDbContext>().AddSignInManager().AddDefaultTokenProviders();
+        var dataProtectionKeysPath = configuration["DATA_PROTECTION_KEYS_PATH"]
+            ?? Path.Combine(AppContext.BaseDirectory, "data-protection-keys");
+        Directory.CreateDirectory(dataProtectionKeysPath);
+        services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(dataProtectionKeysPath));
+        var crossSiteCookies = configuration.GetValue("COOKIE_CROSS_SITE", false);
         services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies(options =>
         {
             options.ApplicationCookie!.Configure(cookie =>
             {
                 cookie.Cookie.Name = "magnetrail_session";
                 cookie.Cookie.HttpOnly = true;
-                cookie.Cookie.SameSite = SameSiteMode.Lax;
-                cookie.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                cookie.Cookie.SameSite = crossSiteCookies ? SameSiteMode.None : SameSiteMode.Lax;
+                cookie.Cookie.SecurePolicy = crossSiteCookies ? CookieSecurePolicy.Always : CookieSecurePolicy.SameAsRequest;
                 cookie.ExpireTimeSpan = TimeSpan.FromHours(8);
                 cookie.SlidingExpiration = true;
                 cookie.Events.OnRedirectToLogin = context => { context.Response.StatusCode = StatusCodes.Status401Unauthorized; return Task.CompletedTask; };

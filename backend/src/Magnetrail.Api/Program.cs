@@ -8,7 +8,9 @@ using Magnetrail.Modules.Regulations;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddProblemDetails();
-builder.Services.AddCors(options => options.AddPolicy("web", policy => policy.WithOrigins("http://localhost:3000", "http://127.0.0.1:3000").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+var configuredCorsOrigins = builder.Configuration["CORS_ORIGINS"]?.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) ?? [];
+var corsOrigins = configuredCorsOrigins.Length > 0 ? configuredCorsOrigins : ["http://localhost:3000", "http://127.0.0.1:3000"];
+builder.Services.AddCors(options => options.AddPolicy("web", policy => policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHealthChecks();
 
