@@ -1,19 +1,37 @@
-export default function HomePage() {
+import Link from "next/link";
+import { ArrowRight, BookOpen, Compass, MapPinned, PencilRuler, ShieldCheck, Waves } from "lucide-react";
+
+const features = [
+  { icon: MapPinned, eyebrow: "DISCOVER", title: "Know where to search", description: "Explore Swiss waterways with a map that makes regulations and restricted areas visible before you arrive." },
+  { icon: PencilRuler, eyebrow: "PLAN", title: "Mark your own waters", description: "Draw personal search areas, name them, and keep your favourite spots ready for the next expedition." },
+  { icon: BookOpen, eyebrow: "REMEMBER", title: "Keep every find", description: "Build a private logbook for discoveries, notes, and the stories that make each throw worth remembering." },
+];
+
+function MapPreview() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center gap-6 px-6 py-24">
-        <p className="text-sm font-medium uppercase tracking-[0.3em] text-accent">Magnetrail</p>
-        <h1 className="max-w-3xl text-5xl font-semibold tracking-tight sm:text-7xl">
-          Explore what the water keeps hidden.
-        </h1>
-        <p className="max-w-xl text-lg text-muted-foreground">
-          The technical foundation for a safer, clearer and more connected magnet-fishing experience.
-        </p>
-        <div className="mt-4 rounded-2xl border border-border bg-surface p-5 text-sm text-muted-foreground">
-          Foundation phase active · Product features will be added in the next phase.
-        </div>
-      </section>
-    </main>
+    <div className="relative min-h-[390px] overflow-hidden rounded-2xl border border-border bg-[#151817] shadow-2xl shadow-black/30 sm:min-h-[500px]">
+      <div className="absolute inset-0 opacity-40" style={{ backgroundImage: "linear-gradient(rgba(164,174,166,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(164,174,166,.07) 1px, transparent 1px)", backgroundSize: "42px 42px" }} />
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 640 560" fill="none" aria-label="Stylised map preview">
+        <path d="M-20 130C90 60 153 174 239 111C332 43 382 130 468 86C544 47 600 75 678 22" stroke="#343d36" strokeWidth="42" strokeLinecap="round" /><path d="M-20 130C90 60 153 174 239 111C332 43 382 130 468 86C544 47 600 75 678 22" stroke="#33b5e5" strokeOpacity=".72" strokeWidth="5" strokeLinecap="round" />
+        <path d="M-20 420C82 390 113 458 216 394C314 333 369 424 444 366C516 310 583 349 678 288" stroke="#343d36" strokeWidth="56" strokeLinecap="round" /><path d="M-20 420C82 390 113 458 216 394C314 333 369 424 444 366C516 310 583 349 678 288" stroke="#33b5e5" strokeOpacity=".62" strokeWidth="6" strokeLinecap="round" />
+        <path d="M100 8C138 80 109 151 164 213C221 277 184 344 240 415C276 460 250 507 274 574M475 -10C436 79 503 145 445 208C391 266 448 324 388 387C345 432 389 510 352 576" stroke="#575f58" strokeOpacity=".5" strokeWidth="2" strokeDasharray="7 10" />
+        <path d="M286 178L334 153L379 185L363 238L309 254L271 222Z" fill="#e58978" fillOpacity=".22" stroke="#e58978" strokeWidth="2" strokeDasharray="6 5" /><path d="M400 305L461 272L518 311L497 374L432 389L388 352Z" fill="#ffb62f" fillOpacity=".15" stroke="#ffb62f" strokeWidth="2" strokeDasharray="6 5" />
+        <path d="M166 278C220 249 254 276 299 303C334 324 363 315 405 334" stroke="#ffb62f" strokeWidth="3" strokeDasharray="7 8" /><circle cx="166" cy="278" r="7" fill="#ffb62f" stroke="#101010" strokeWidth="3" /><circle cx="405" cy="334" r="7" fill="#ffb62f" stroke="#101010" strokeWidth="3" />
+      </svg>
+      <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-border bg-background/90 px-3 py-2 text-xs font-medium text-foreground backdrop-blur-sm"><span className="size-2 rounded-full bg-accent" /> Live exploration map</div>
+      <div className="absolute bottom-5 left-5 rounded-xl border border-border bg-background/90 p-4 backdrop-blur-sm"><p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Your expedition</p><p className="mt-1 text-sm font-medium text-foreground">Aare · Bern</p><div className="mt-3 flex items-center gap-3 text-xs text-muted-foreground"><span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-restricted" /> Restricted</span><span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-accent" /> My area</span></div></div>
+      <div className="absolute right-5 top-5 flex flex-col gap-1 rounded-lg border border-border bg-background/90 p-1 backdrop-blur-sm"><span className="flex size-8 items-center justify-center text-sm text-foreground">+</span><span className="h-px bg-border" /><span className="flex size-8 items-center justify-center text-sm text-muted-foreground">−</span></div>
+    </div>
   );
 }
 
+export default function HomePage() {
+  return (
+    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+      <section className="relative border-b border-border"><div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pb-20 pt-32 sm:px-10 sm:pb-28 sm:pt-40 lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)] lg:gap-16 lg:px-12"><div className="relative z-10"><div className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent"><Waves className="size-4" /> Magnetfishing in Switzerland</div><h1 className="max-w-2xl text-5xl font-semibold leading-[.98] tracking-[-0.04em] sm:text-7xl lg:text-[5.5rem]">Find what the water keeps hidden.</h1><p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground sm:text-xl">Magnetrail is your map-first companion for safer magnetfishing expeditions. Discover where to go, understand where not to go, and keep every find in one place.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Link href="/map" className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3.5 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90">Explore the map <ArrowRight className="size-4" /></Link><Link href="/register" className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-surface px-5 py-3.5 text-sm font-semibold text-foreground transition hover:bg-hover-surface">Start your logbook</Link></div><div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground"><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-accent" /> Private by default</span><span className="flex items-center gap-2"><Compass className="size-4 text-accent" /> Built for explorers</span></div></div><MapPreview /></div></section>
+      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12"><div className="max-w-xl"><p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">One clear starting point</p><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">From a question to an expedition.</h2><p className="mt-5 text-base leading-7 text-muted-foreground">Good magnetfishing starts before the first throw. Magnetrail brings the map, local context, and your own field notes together so you can spend more time exploring.</p></div><div className="mt-12 grid gap-4 md:grid-cols-3">{features.map(feature => { const Icon = feature.icon; return <article key={feature.title} className="rounded-2xl border border-border bg-surface p-6 transition hover:-translate-y-1 hover:border-accent/60 sm:p-7"><div className="flex size-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent"><Icon className="size-5" /></div><p className="mt-8 text-[10px] font-semibold tracking-[0.2em] text-accent">{feature.eyebrow}</p><h3 className="mt-2 text-xl font-semibold text-foreground">{feature.title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{feature.description}</p></article>; })}</div></section>
+      <section className="border-y border-border bg-surface/60"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 py-16 sm:px-10 sm:py-20 lg:flex-row lg:items-center lg:px-12"><div><p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Your next throw starts here</p><h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">See the water differently.</h2></div><Link href="/register" className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-5 py-3.5 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90">Create free account <ArrowRight className="size-4" /></Link></div></section>
+      <footer className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-12"><span className="font-semibold uppercase tracking-[0.2em] text-foreground">Magnetrail</span><span>Explore responsibly. Respect the water.</span></footer>
+    </main>
+  );
+}
