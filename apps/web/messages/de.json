@@ -32,6 +32,13 @@
     "myLocation": "Meinen Standort anzeigen",
     "layers": "Kartenebenen",
     "close": "Schliessen",
+    "drawArea": "Polygon zeichnen",
+    "drawAreaHint": "{count} Punkte gesetzt. Mindestens 3 Punkte zum Abschliessen.",
+    "finishArea": "Polygon abschliessen",
+    "undoPoint": "Letzten Punkt entfernen",
+    "resetArea": "Zeichnung zurücksetzen",
+    "drawSaveError": "Polygon konnte nicht gespeichert werden.",
+    "drawLoginRequired": "Bitte zuerst anmelden, damit das Polygon gespeichert werden kann.",
     "geolocation-denied": "Standortzugriff wurde nicht erteilt.",
     "geolocation-unavailable": "Standort ist auf diesem Gerät nicht verfügbar."
   },
@@ -49,8 +56,9 @@
     "classification": { "PROHIBITED": "Verboten", "RESTRICTED": "Eingeschränkt", "UNKNOWN": "Nicht geprüft", "INFORMATION_ONLY": "Information" }
   },
   "Places": {
-    "title": "Meine Orte", "description": "Speichere Spots und Suchflächen für deine nächste Expedition.", "yourPlaces": "Gespeicherte Orte", "empty": "Noch keine Orte gespeichert.", "addSpot": "Spot auf der Karte speichern", "addArea": "Suchfläche zeichnen", "selectSpot": "Klicke auf die Karte, um deinen Spot zu setzen.", "drawArea": "Klicke mindestens drei Punkte auf der Karte an.", "locationSelected": "Geometrie ausgewählt. Vergib jetzt einen Namen.", "name": "Name", "spotNamePlaceholder": "z. B. Alte Brücke", "areaNamePlaceholder": "z. B. Suchgebiet Rhein", "spot": "Spot", "area": "Suchfläche", "private": "Privat", "public": "Öffentlich", "save": "Speichern", "saving": "Wird gespeichert …", "cancel": "Abbrechen", "delete": "Löschen", "loadError": "Orte konnten nicht geladen werden.", "saveError": "Ort konnte nicht gespeichert werden.", "deleteError": "Ort konnte nicht gelöscht werden."
+    "title": "Meine Orte", "description": "Speichere Spots und Suchflächen für deine nächste Expedition.", "yourPlaces": "Gespeicherte Orte", "empty": "Noch keine Orte gespeichert.", "addSpot": "Spot auf der Karte speichern", "addArea": "Suchfläche zeichnen", "selectSpot": "Klicke auf die Karte, um deinen Spot zu setzen.", "drawArea": "Polygon zeichnen", "drawAreaHint": "{count} Punkte gesetzt. Setze mindestens drei Punkte und schliesse dann das Polygon ab.", "finishArea": "Polygon abschliessen", "undoPoint": "Letzten Punkt entfernen", "resetArea": "Zeichnung zurücksetzen", "mapLabel": "Karte meiner Orte", "selectedPlace": "Ausgewählt: {name}", "locationSelected": "Geometrie ausgewählt. Vergib jetzt einen Namen.", "name": "Name", "spotNamePlaceholder": "z. B. Alte Brücke", "areaNamePlaceholder": "z. B. Suchgebiet Rhein", "spot": "Spot", "area": "Suchfläche", "private": "Privat", "public": "Öffentlich", "save": "Speichern", "saving": "Wird gespeichert …", "cancel": "Abbrechen", "delete": "Löschen", "loadError": "Orte konnten nicht geladen werden.", "saveError": "Ort konnte nicht gespeichert werden.", "deleteError": "Ort konnte nicht gelöscht werden."
   },
+  "Logbook": { "title": "Sammelbuch", "description": "Dokumentiere deine Funde und Fundorte.", "yourFindings": "Deine Funde", "empty": "Noch keine Funde gespeichert.", "add": "Fund hinzufügen", "newTitle": "Neuen Fund erfassen", "editTitle": "Fund bearbeiten", "titleLabel": "Titel", "descriptionLabel": "Beschreibung", "category": "Kategorie", "foundAt": "Funddatum", "weight": "Gewicht (g)", "longitude": "Längengrad", "latitude": "Breitengrad", "public": "Öffentlich sichtbar", "save": "Speichern", "update": "Aktualisieren", "saving": "Wird gespeichert …", "cancel": "Abbrechen", "edit": "Bearbeiten", "delete": "Löschen", "mediaCount": "{count, plural, =1 {1 Foto hinterlegt} other {# Fotos hinterlegt}}", "loadError": "Funde konnten nicht geladen werden.", "saveError": "Fund konnte nicht gespeichert werden.", "deleteError": "Fund konnte nicht gelöscht werden." },
   "Auth": { "login": "Anmelden", "register": "Konto erstellen", "logout": "Abmelden", "email": "E-Mail", "username": "Benutzername", "password": "Passwort", "confirmPassword": "Passwort bestätigen", "loading": "Wird verarbeitet …", "invalidForm": "Bitte prüfe deine Eingaben.", "invalidCredentials": "E-Mail oder Passwort ist ungültig.", "registrationError": "Konto konnte nicht erstellt werden.", "noAccount": "Noch kein Konto?", "hasAccount": "Bereits registriert?", "showPassword": "Passwort anzeigen", "hidePassword": "Passwort verbergen", "welcomeBack": "Willkommen zurück", "loginSubtitle": "Melde dich an, um deine Expedition fortzusetzen.", "joinExpedition": "Werde Teil der Expedition", "registerSubtitle": "Erstelle dein Magnetrail-Profil." },
   "Profile": { "title": "Mein Profil", "username": "Benutzername", "email": "E-Mail", "level": "Level", "save": "Speichern", "saving": "Wird gespeichert …", "loading": "Profil wird geladen …", "updated": "Profil aktualisiert.", "loadError": "Profil konnte nicht geladen werden.", "updateError": "Profil konnte nicht aktualisiert werden." }
 }

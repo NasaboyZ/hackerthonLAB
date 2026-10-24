@@ -27,6 +27,7 @@ app.UseAuthorization();
 app.MapHealthChecks("/health");
 app.MapIdentityEndpoints();
 app.MapPlayersEndpoints();
+app.MapFindingsEndpoints();
 app.MapRegulationsEndpoints();
 app.MapExplorationEndpoints();
 

@@ -158,6 +158,19 @@ public sealed class RegulationsDbContext(DbContextOptions<RegulationsDbContext> 
                 table.HasCheckConstraint("ck_rules_verification_status", "verification_status IN ('verified','pending')");
             });
             entity.HasKey(rule => rule.Id);
+            entity.Property(rule => rule.Id).HasColumnName("id");
+            entity.Property(rule => rule.Title).HasColumnName("title");
+            entity.Property(rule => rule.Description).HasColumnName("description");
+            entity.Property(rule => rule.Classification).HasColumnName("classification");
+            entity.Property(rule => rule.VerificationStatus).HasColumnName("verification_status");
+            entity.Property(rule => rule.Jurisdiction).HasColumnName("jurisdiction");
+            entity.Property(rule => rule.AuthorityName).HasColumnName("authority_name");
+            entity.Property(rule => rule.SourcePublicationDate).HasColumnName("source_publication_date");
+            entity.Property(rule => rule.LastVerifiedAt).HasColumnName("last_verified_at");
+            entity.Property(rule => rule.ValidFrom).HasColumnName("valid_from");
+            entity.Property(rule => rule.ValidUntil).HasColumnName("valid_until");
+            entity.Property(rule => rule.CreatedAt).HasColumnName("created_at");
+            entity.Property(rule => rule.UpdatedAt).HasColumnName("updated_at");
             entity.Property(rule => rule.Title).HasMaxLength(240).IsRequired();
             entity.Property(rule => rule.Description).IsRequired();
             entity.Property(rule => rule.Classification).HasMaxLength(32).IsRequired();
@@ -172,6 +185,11 @@ public sealed class RegulationsDbContext(DbContextOptions<RegulationsDbContext> 
         {
             entity.ToTable("sources");
             entity.HasKey(source => source.Id);
+            entity.Property(source => source.Id).HasColumnName("id");
+            entity.Property(source => source.RuleId).HasColumnName("rule_id");
+            entity.Property(source => source.AuthorityName).HasColumnName("authority_name");
+            entity.Property(source => source.SourceUrl).HasColumnName("source_url");
+            entity.Property(source => source.SourceLabel).HasColumnName("source_label");
             entity.Property(source => source.SourceUrl).HasMaxLength(1000).IsRequired();
             entity.Property(source => source.AuthorityName).HasMaxLength(240).IsRequired();
             entity.HasIndex(source => source.RuleId);
@@ -183,7 +201,13 @@ public sealed class RegulationsDbContext(DbContextOptions<RegulationsDbContext> 
                 table.HasCheckConstraint("ck_zones_geometry_verification_status", "geometry_verification_status IN ('verified','pending')");
             });
             entity.HasKey(zone => zone.Id);
+            entity.Property(zone => zone.Id).HasColumnName("id");
+            entity.Property(zone => zone.RuleId).HasColumnName("rule_id");
             entity.Property(zone => zone.Geometry).HasColumnType("geometry (multipolygon,4326)");
+            entity.Property(zone => zone.Geometry).HasColumnName("geometry");
+            entity.Property(zone => zone.GeometrySource).HasColumnName("geometry_source");
+            entity.Property(zone => zone.GeometryVerificationStatus).HasColumnName("geometry_verification_status");
+            entity.Property(zone => zone.CreatedAt).HasColumnName("created_at");
             entity.Property(zone => zone.GeometrySource).HasMaxLength(240).IsRequired();
             entity.Property(zone => zone.GeometryVerificationStatus).HasMaxLength(32).IsRequired();
             entity.HasIndex(zone => zone.Geometry).HasMethod("gist");

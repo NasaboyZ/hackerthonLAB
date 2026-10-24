@@ -1,27 +1,40 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import maplibregl, { type Map as MapLibreMap, type Marker } from "maplibre-gl";
-import { SWISS_BOUNDS, SWISSTOPO_STYLE_URL } from "@/features/map/config/map.config";
+import { useCallback, useEffect, useRef } from "react";
+import { Pencil, RotateCcw, Undo2 } from "lucide-react";
+import * as maplibregl from "maplibre-gl";
+import type { GeoJSONSource, Map as MapLibreMap, MapGeoJSONFeature, MapMouseEvent, Marker } from "maplibre-gl";
+import { useTranslations } from "next-intl";
+import { BASEMAP_STYLE_URL, MAP_COLORS, SWISS_BOUNDS } from "@/features/map/config/map.config";
 import type { Place } from "@/features/places/types/place.types";
 
-type PlacesMapProps = { places: Place[]; captureMode: "spot" | "area" | null; onSpotLocation: (coordinates: [number, number]) => void; onAreaCoordinates: (coordinates: number[][][][]) => void };
+type PlacesMapProps = { places: Place[]; captureMode: "spot" | "area" | null; finishAreaRequest: number; undoAreaRequest: number; resetAreaRequest: number; onToggleArea: () => void; onUndoArea: () => void; onResetArea: () => void; onSpotLocation: (coordinates: [number, number]) => void; onAreaCoordinates: (coordinates: number[][][][]) => void; onAreaPointCount: (count: number) => void; onSelectPlace: (place: Place) => void };
+const draftSourceId = "magnetrail-place-draft";
+const savedSourceId = "magnetrail-saved-places";
 
-export function PlacesMap({ places, captureMode, onSpotLocation, onAreaCoordinates }: PlacesMapProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<MapLibreMap | null>(null);
-  const markersRef = useRef<Marker[]>([]);
-  const areaPointsRef = useRef<[number, number][]>([]);
-  const modeRef = useRef(captureMode);
-  useEffect(() => { modeRef.current = captureMode; }, [captureMode]);
+export function PlacesMap({ places, captureMode, finishAreaRequest, undoAreaRequest, resetAreaRequest, onToggleArea, onUndoArea, onResetArea, onSpotLocation, onAreaCoordinates, onAreaPointCount, onSelectPlace }: PlacesMapProps) {
+  const t = useTranslations("Places");
+  const containerRef = useRef<HTMLDivElement>(null); const mapRef = useRef<MapLibreMap | null>(null); const markersRef = useRef<Marker[]>([]); const pointsRef = useRef<[number, number][]>([]); const modeRef = useRef(captureMode); const placesRef = useRef(places);
+  useEffect(() => { modeRef.current = captureMode; }, [captureMode]); useEffect(() => { placesRef.current = places; }, [places]);
+
+  const updateDraft = useCallback((map: MapLibreMap) => { const source = map.getSource(draftSourceId) as GeoJSONSource | undefined; if (!source) return; const points = pointsRef.current; const pointFeatures = points.map(point => ({ type: "Feature" as const, geometry: { type: "Point" as const, coordinates: point }, properties: {} })); const line = points.length > 1 ? { type: "Feature" as const, geometry: { type: "LineString" as const, coordinates: points }, properties: {} } : null; const polygon = points.length >= 3 ? { type: "Feature" as const, geometry: { type: "Polygon" as const, coordinates: [[...points, points[0]]] }, properties: {} } : null; source.setData({ type: "FeatureCollection", features: [...pointFeatures, line, polygon].filter(Boolean) as never }); onAreaPointCount(points.length); }, [onAreaPointCount]);
+  const updateSaved = useCallback((map: MapLibreMap, values: Place[]) => { const source = map.getSource(savedSourceId) as GeoJSONSource | undefined; if (!source) return; source.setData({ type: "FeatureCollection", features: values.filter(place => place.geometry.type === "MultiPolygon").map(place => ({ type: "Feature" as const, geometry: { type: "Polygon" as const, coordinates: place.geometry.coordinates[0] as number[][][] }, properties: { placeId: place.id } })) }); }, []);
+
   useEffect(() => {
-    if (!containerRef.current) return;
-    const map = new maplibregl.Map({ container: containerRef.current, style: SWISSTOPO_STYLE_URL, bounds: SWISS_BOUNDS, fitBoundsOptions: { padding: 32, maxZoom: 9 }, attributionControl: {}, maxBounds: [[4.5, 45], [12, 48.8]] });
-    mapRef.current = map;
-    map.on("click", event => { if (modeRef.current === "spot") onSpotLocation([event.lngLat.lng, event.lngLat.lat]); if (modeRef.current === "area") { areaPointsRef.current = [...areaPointsRef.current, [event.lngLat.lng, event.lngLat.lat]]; if (areaPointsRef.current.length >= 3) { const ring = [...areaPointsRef.current, areaPointsRef.current[0]]; onAreaCoordinates([[[...ring]]]); } } });
-    return () => { markersRef.current.forEach(marker => marker.remove()); map.remove(); mapRef.current = null; };
-  }, [onAreaCoordinates, onSpotLocation]);
-  useEffect(() => { markersRef.current.forEach(marker => marker.remove()); markersRef.current = []; const map = mapRef.current; if (!map) return; for (const place of places) { if (place.geometry.type !== "Point") continue; markersRef.current.push(new maplibregl.Marker({ color: "#F2BD66" }).setLngLat(place.geometry.coordinates).addTo(map)); } }, [places]);
-  useEffect(() => { areaPointsRef.current = []; }, [captureMode]);
-  return <div ref={containerRef} className="min-h-[420px] overflow-hidden rounded-2xl border border-border" aria-label="Karte meiner Orte" role="application" />;
+    if (!containerRef.current) return; const map = new maplibregl.Map({ container: containerRef.current, style: BASEMAP_STYLE_URL, bounds: SWISS_BOUNDS, fitBoundsOptions: { padding: 32, maxZoom: 9 }, attributionControl: {}, maxBounds: [[4.5, 45], [12, 48.8]] }); mapRef.current = map;
+    const empty = { type: "FeatureCollection" as const, features: [] };
+    const click = (event: MapMouseEvent) => { if (modeRef.current === "spot") { onSpotLocation([event.lngLat.lng, event.lngLat.lat]); return; } if (modeRef.current !== "area") return; pointsRef.current = [...pointsRef.current, [event.lngLat.lng, event.lngLat.lat]]; updateDraft(map); };
+    const savedClick = (event: MapMouseEvent) => { const feature = map.queryRenderedFeatures(event.point, { layers: ["magnetrail-saved-place-fill"] })[0] as MapGeoJSONFeature | undefined; const place = placesRef.current.find(item => item.id === feature?.properties?.placeId); if (place) onSelectPlace(place); };
+    const setup = () => { if (!map.getSource(draftSourceId)) map.addSource(draftSourceId, { type: "geojson", data: empty }); if (!map.getLayer("magnetrail-place-draft-fill")) map.addLayer({ id: "magnetrail-place-draft-fill", type: "fill", source: draftSourceId, paint: { "fill-color": MAP_COLORS.restricted, "fill-opacity": 0.22 } }); if (!map.getLayer("magnetrail-place-draft-line")) map.addLayer({ id: "magnetrail-place-draft-line", type: "line", source: draftSourceId, paint: { "line-color": MAP_COLORS.restricted, "line-width": 3, "line-dasharray": [2, 1] } }); if (!map.getLayer("magnetrail-place-draft-points")) map.addLayer({ id: "magnetrail-place-draft-points", type: "circle", source: draftSourceId, filter: ["==", ["geometry-type"], "Point"], paint: { "circle-color": MAP_COLORS.restricted, "circle-radius": 5, "circle-stroke-color": "#101010", "circle-stroke-width": 2 } }); if (!map.getSource(savedSourceId)) map.addSource(savedSourceId, { type: "geojson", data: empty }); if (!map.getLayer("magnetrail-saved-place-fill")) map.addLayer({ id: "magnetrail-saved-place-fill", type: "fill", source: savedSourceId, paint: { "fill-color": MAP_COLORS.accent, "fill-opacity": 0.14 } }); if (!map.getLayer("magnetrail-saved-place-line")) map.addLayer({ id: "magnetrail-saved-place-line", type: "line", source: savedSourceId, paint: { "line-color": MAP_COLORS.accent, "line-width": 2 } }); updateSaved(map, placesRef.current); map.on("click", click); map.on("click", "magnetrail-saved-place-fill", savedClick); };
+    if (map.isStyleLoaded()) setup(); else map.once("load", setup);
+    return () => { markersRef.current.forEach(marker => marker.remove()); map.off("click", click); map.off("click", "magnetrail-saved-place-fill", savedClick); map.off("load", setup); ["magnetrail-saved-place-line", "magnetrail-saved-place-fill", "magnetrail-place-draft-points", "magnetrail-place-draft-line", "magnetrail-place-draft-fill"].forEach(id => { if (map.getLayer(id)) map.removeLayer(id); }); [savedSourceId, draftSourceId].forEach(id => { if (map.getSource(id)) map.removeSource(id); }); map.remove(); mapRef.current = null; };
+  }, [onAreaPointCount, onSelectPlace, onSpotLocation, updateDraft, updateSaved]);
+
+  useEffect(() => { const map = mapRef.current; if (!map) return; updateSaved(map, places); markersRef.current.forEach(marker => marker.remove()); markersRef.current = []; for (const place of places) if (place.geometry.type === "Point") markersRef.current.push(new maplibregl.Marker({ color: MAP_COLORS.accent }).setLngLat(place.geometry.coordinates).addTo(map)); }, [places, updateSaved]);
+  useEffect(() => { pointsRef.current = []; onAreaPointCount(0); const source = mapRef.current?.getSource(draftSourceId) as GeoJSONSource | undefined; source?.setData({ type: "FeatureCollection", features: [] }); }, [captureMode, onAreaPointCount]);
+  useEffect(() => { if (finishAreaRequest === 0 || pointsRef.current.length < 3) return; const ring = [...pointsRef.current, pointsRef.current[0]]; onAreaCoordinates([[[...ring]]]); }, [finishAreaRequest, onAreaCoordinates]);
+  useEffect(() => { if (undoAreaRequest === 0) return; pointsRef.current = pointsRef.current.slice(0, -1); if (mapRef.current) updateDraft(mapRef.current); }, [undoAreaRequest, updateDraft]);
+  useEffect(() => { if (resetAreaRequest === 0) return; pointsRef.current = []; if (mapRef.current) updateDraft(mapRef.current); }, [resetAreaRequest, updateDraft]);
+
+  return <div className="relative min-h-[420px] overflow-hidden rounded-2xl border border-border"><div ref={containerRef} className="absolute inset-0" aria-label={t("mapLabel")} role="application" /><div className="absolute right-3 top-3 z-10 flex flex-col gap-2"><button type="button" onClick={onToggleArea} className={`flex size-11 items-center justify-center rounded-xl border shadow-lg transition-colors ${captureMode === "area" ? "border-accent bg-accent text-background" : "border-border bg-surface/95 text-accent hover:bg-hover-surface"}`} aria-label={t("drawArea")} aria-pressed={captureMode === "area"}><Pencil className="size-5" /></button>{captureMode === "area" ? <><button type="button" onClick={onUndoArea} className="flex size-11 items-center justify-center rounded-xl border border-border bg-surface/95 text-muted-foreground shadow-lg hover:bg-hover-surface" aria-label={t("undoPoint")}><Undo2 className="size-5" /></button><button type="button" onClick={onResetArea} className="flex size-11 items-center justify-center rounded-xl border border-border bg-surface/95 text-muted-foreground shadow-lg hover:bg-hover-surface" aria-label={t("resetArea")}><RotateCcw className="size-5" /></button></> : null}</div></div>;
 }

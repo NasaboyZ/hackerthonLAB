@@ -23,6 +23,7 @@ public sealed class MagnetrailIdentityDbContext(DbContextOptions<MagnetrailIdent
         modelBuilder.Entity<MagnetrailUser>(entity =>
         {
             entity.ToTable("users");
+            entity.Property(user => user.Id).HasColumnName("id");
             entity.Property(user => user.UserName).HasColumnName("user_name");
             entity.Property(user => user.NormalizedUserName).HasColumnName("normalized_user_name");
             entity.Property(user => user.Email).HasColumnName("email");
@@ -51,6 +52,10 @@ public sealed class MagnetrailIdentityDbContext(DbContextOptions<MagnetrailIdent
         modelBuilder.Entity<IdentityUserLogin<Guid>>(entity =>
         {
             entity.ToTable("user_logins"); entity.Property(login => login.LoginProvider).HasColumnName("login_provider"); entity.Property(login => login.ProviderKey).HasColumnName("provider_key"); entity.Property(login => login.ProviderDisplayName).HasColumnName("provider_display_name"); entity.Property(login => login.UserId).HasColumnName("user_id");
+        });
+        modelBuilder.Entity<IdentityUserRole<Guid>>(entity =>
+        {
+            entity.ToTable("user_roles"); entity.Property(role => role.UserId).HasColumnName("user_id"); entity.Property(role => role.RoleId).HasColumnName("role_id");
         });
         modelBuilder.Entity<IdentityUserToken<Guid>>(entity =>
         {

@@ -182,7 +182,9 @@ public static class ExplorationEndpoints
     private static MultiPolygon CreateBoundary(JsonElement coordinates)
     {
         if (coordinates.ValueKind != JsonValueKind.Array || coordinates.GetArrayLength() != 1) throw new ArgumentException();
-        var ring = coordinates[0];
+        var polygon = coordinates[0];
+        if (polygon.ValueKind != JsonValueKind.Array || polygon.GetArrayLength() != 1) throw new ArgumentException();
+        var ring = polygon[0];
         if (ring.ValueKind != JsonValueKind.Array || ring.GetArrayLength() < 4) throw new ArgumentException();
         var points = ring.EnumerateArray().Select(point =>
         {

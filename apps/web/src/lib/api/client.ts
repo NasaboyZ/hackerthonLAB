@@ -26,7 +26,13 @@ export async function apiFetchWithCsrf<T>(path: string, init?: RequestInit): Pro
   try {
     return await apiFetch<T>(path, { ...init, headers });
   } catch (error) {
-    if (error instanceof Error && error.message.includes("400")) csrfToken = null;
+    if (error instanceof Error && error.message.includes("400")) {
+      csrfToken = null;
+      const response = await apiFetch<{ token: string }>("/api/v1/auth/csrf");
+      csrfToken = response.token;
+      headers.set("X-CSRF-TOKEN", csrfToken);
+      return apiFetch<T>(path, { ...init, headers });
+    }
     throw error;
   }
 }

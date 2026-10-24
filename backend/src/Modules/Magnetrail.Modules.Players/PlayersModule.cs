@@ -85,9 +85,9 @@ public sealed class PlayersDbContext(DbContextOptions<PlayersDbContext> options)
             entity.ToTable("profiles");
             entity.HasKey(x => x.UserId);
             entity.Property(x => x.UserId).HasColumnName("user_id");
-            entity.Property(x => x.Username).HasMaxLength(32).IsRequired();
+            entity.Property(x => x.Username).HasColumnName("username").HasMaxLength(32).IsRequired();
             entity.HasIndex(x => x.Username).IsUnique();
-            entity.Property(x => x.Level).HasDefaultValue(1);
+            entity.Property(x => x.Level).HasColumnName("level").HasDefaultValue(1);
             entity.Property(x => x.CreatedAt).HasColumnName("created_at");
             entity.Property(x => x.UpdatedAt).HasColumnName("updated_at");
             entity.ToTable(table => table.HasCheckConstraint("ck_profiles_level_positive", "level >= 1"));
